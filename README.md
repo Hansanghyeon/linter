@@ -1,7 +1,3 @@
-[![Publish Package to Github](https://github.com/hyeon/eslint-config/actions/workflows/deploy.yaml/badge.svg)](https://github.com/hyeon/eslint-config/actions/workflows/deploy.yaml) [![Publish Package to NPM](https://badgen.net/npm/v/@hyeon/eslint-config)](https://www.npmjs.com/package/@hyeon/eslint-config)
-
-# @hyeon/eslint-config
-
 A rule set of hyeon's ESLint configurations
 
 - eslint:recommended [List of available rules - ESLint - Pluggable JavaScript linter](https://eslint.org/docs/rules/)
