@@ -1,0 +1,124 @@
+name: 📦 패키지 배포
+
+# .changeset, packages 디렉토리의 변경사항들이 main 브렌치에 push될때 이벤트를 실행한다. 
+on:
+  workflow_dispatch:
+  # push:
+  #   paths:
+  #     - ".changeset/**"
+  #     - "packages/**"
+  #   branches:
+  #     - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  npm-release:
+    name: Release (npm)
+    runs-on: ubuntu-latest
+    steps:
+      # 레포지토리에 체크아웃하여 소스를 가져온다.
+      - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # Node.js를 설치한다.
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "lts/*"
+
+      # 빌드 및 테스트를 위해서 의존성을 설치한다.
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --ignore-engines
+        env:
+          CI: true
+
+      # 배포를 위해 .npmrc 파일을 생성하고 인증 토큰을 추가한다.
+      - name: Configure npm
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            @hyeon:registry=https://registry.npmjs.org/
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # 패키지를 빌드한다.
+      - name: Build packages
+        run: yarn build
+
+      # Changesets에서 제공하는 Action을 사용할 수 있다.
+      # NPM에 배포, Git 태그 생성 등의 작업을 수행한다.
+      - name: Create release Pull Request or publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: changeset publish
+          commit: "ci(changesets): version packages"
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # 배포에 실패한 경우 후속 처리
+      - name: Publishing fail
+        if: steps.publish.outputs.published != 'true'
+        run: ...
+
+      # 배포가 성공한 경우 후속 처리
+      - name: Publishing success!
+        if: steps.publish.outputs.published == 'true'
+        run: ... # 메일, 슬랙 메시지 전송 등... 필요 기능 추가
+
+  # github package에 배포하는 것은 메인 배포가 아니기 때문에 npm 배포가 정상적으로 완료된다면 github package에 배포한다.
+  gh-release:
+    name: Release (github package)
+    needs: [npm-release]
+    runs-on: ubuntu-latest
+    steps:
+      # 레포지토리에 체크아웃하여 소스를 가져온다.
+      - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # Node.js를 설치한다.
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "lts/*"
+
+      # 빌드 및 테스트를 위해서 의존성을 설치한다.
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --ignore-engines
+        env:
+          CI: true
+
+      # 배포를 위해 .npmrc 파일을 생성하고 인증 토큰을 추가한다.
+      - name: Configure npm
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            @hyeon:registry=https://npm.pkg.github.com/
+            //npm.pkg.github.com/:_authToken=$GH_TOKEN
+          EOF
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # 패키지를 빌드한다.
+      - name: Build packages
+        run: yarn build
+
+      - name: Deploy packages
+        id: github_deploy
+        run: yarn publish
+
+      # 배포에 실패한 경우 후속 처리
+      - name: Publishing fail
+        if: steps.github_deploy.outputs.published != 'true'
+        run: ...
+
+      # 배포가 성공한 경우 후속 처리
+      - name: Publishing success!
+        if: steps.github_deploy.outputs.published == 'true'
+        run: ... # 메일, 슬랙 메시지 전송 등... 필요 기능 추가

@@ -1,0 +1,85 @@
+{
+  "name": "@hyeon/eslint-config",
+  "version": "1.0.0",
+  "description": "ESLint configs for Javascript",
+  "main": "./lib/index.js",
+  "scripts": {
+    "lint": "eslint . --config=eslintrc.json",
+    "test": "npm run lint && tape test/*.js",
+    "build": "nanobundle build",
+    "prepublishOnly": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyeon/eslint-config.git"
+  },
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "hyeon",
+    "javascript"
+  ],
+  "author": "hyeon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hyeon/eslint-config/issues"
+  },
+  "homepage": "https://github.com/hyeon/eslint-config#readme",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-react": "^7.29.3",
+    "eslint-plugin-react-hooks": "^4.3.0"
+  },
+  "peerDependencies": {
+    "eslint": "^7.23.0 || ^8.10.0"
+  },
+  "devDependencies": {
+    "@actions/exec": "^1.1.1",
+    "@changesets/cli": "^2.26.0",
+    "nanobundle": "^1.5.0"
+  },
+  "exports": {
+    ".": {
+      "source": "./lib/index.js",
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.mjs"
+    },
+    "./recommended": {
+      "source": "./lib/recommended.js",
+      "require": "./lib/recommended.cjs",
+      "import": "./lib/recommended.mjs"
+    },
+    "./typescript": {
+      "source": "./lib/typescript.js",
+      "require": "./lib/typescript.cjs",
+      "import": "./lib/typescript.mjs"
+    },
+    "./react": {
+      "source": "./lib/react.js",
+      "require": "./lib/react.cjs",
+      "import": "./lib/react.mjs"
+    },
+    "./prettier": {
+      "source": "./lib/prettier.js",
+      "require": "./lib/prettier.cjs",
+      "import": "./lib/prettier.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "typescript",
+    "react",
+    "prettier"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
