@@ -88,8 +88,11 @@ jobs:
       - name: Set result
         id: result
         run: |
-          result=${{ steps.is_gh_release.outputs.is_gh_release == 'true' ? 'PUBLISHED' : 'PULL_REQUEST' }}
-          echo "result=${result}" >> "$GITHUB_OUTPUT"
+          if [ "${{ steps.is_gh_release.outputs.is_gh_release }}" == "true" ]; then
+            echo "result=PUBLISHED" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=PULL_REQUEST" >> "$GITHUB_OUTPUT"
+          fi
 
   # github package에 배포하는 것은 메인 배포가 아니기 때문에 npm 배포가 정상적으로 완료된다면 github package에 배포한다.
   gh-release:
