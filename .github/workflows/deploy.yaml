@@ -21,8 +21,8 @@ jobs:
           fetch-depth: 0
       - id: is_run_changeset
         run: |
-          result=$$(make is_run_changeset);
-          echo "result=\"$$result\"" >> "$GITHUB_OUTPUT"
+          result=$(make is_run_changeset)
+          echo "result=\"$result\"" >> "$GITHUB_OUTPUT"
 
   npm-release:
     name: Release (npm)
