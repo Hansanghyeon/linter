@@ -35,16 +35,6 @@ jobs:
         env:
           CI: true
 
-      # 배포를 위해 .npmrc 파일을 생성하고 인증 토큰을 추가한다.
-      - name: Configure npm
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            @hyeon:registry=https://registry.npmjs.org/
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       # 패키지를 빌드한다.
       - name: Build packages
         run: yarn build
@@ -54,22 +44,34 @@ jobs:
       - name: Create release Pull Request or publish to NPM
         id: changesets
         uses: changesets/action@v1
-        with:
-          publish: changeset publish
-          commit: "ci(changesets): version packages"
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 배포에 실패한 경우 후속 처리
-      - name: Publishing fail
-        if: steps.publish.outputs.published != 'true'
-        run: ...
+      # 배포를 위해 .npmrc 파일을 생성하고 인증 토큰을 추가한다
+      - name: NPM_TOKEN 설정
+        if: steps.changesets.outputs.hasChangesets == 'false'
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # 배포가 성공한 경우 후속 처리
-      - name: Publishing success!
-        if: steps.publish.outputs.published == 'true'
-        run: ... # 메일, 슬랙 메시지 전송 등... 필요 기능 추가
+      - name: Publish
+        id: npmPublish
+        if: steps.changesets.outputs.hasChangesets == 'false'
+        # 게시가 발생해야 할 때 작업을 수행할 수 있습니다.
+        run: npm publish
+
+      # # npmPublish 배포에 실패한 경우 후속 처리
+      # - name: Publishing fail
+      #   if: steps.npmPublish.outputs.published != 'true'
+      #   run: ...
+
+      # # 배포가 성공한 경우 후속 처리
+      # - name: Publishing success!
+      #   if: steps.publish.outputs.published == 'true'
+      #   run: ... # 메일, 슬랙 메시지 전송 등... 필요 기능 추가
 
   # github package에 배포하는 것은 메인 배포가 아니기 때문에 npm 배포가 정상적으로 완료된다면 github package에 배포한다.
   gh-release:
