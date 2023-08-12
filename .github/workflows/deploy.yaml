@@ -91,6 +91,11 @@ jobs:
         with:
           node-version: "lts/*"
 
+      # @hyeon 또는 @*/* 패키지를 Github에 배포하기위해서 @Hansanghyeon:*로 이름을 변경한다
+      - name: Rename package name
+        run: |
+          sed -i 's/"@hyeon\/eslint-config"/"@hansanghyeon\/eslint-config"/' package.json
+
       # 빌드 및 테스트를 위해서 의존성을 설치한다.
       - name: Install dependencies
         run: yarn install --frozen-lockfile --ignore-engines
@@ -101,7 +106,7 @@ jobs:
       - name: Configure npm
         run: |
           cat << EOF > "$HOME/.npmrc"
-            @hyeon:registry=https://npm.pkg.github.com/
+            @hansanghyeon:registry=https://npm.pkg.github.com/
             //npm.pkg.github.com/:_authToken=$GH_TOKEN
           EOF
         env:
@@ -113,14 +118,14 @@ jobs:
 
       - name: Deploy packages
         id: github_deploy
-        run: yarn publish
+        run: npm publish
 
-      # 배포에 실패한 경우 후속 처리
-      - name: Publishing fail
-        if: steps.github_deploy.outputs.published != 'true'
-        run: ...
+      # # 배포에 실패한 경우 후속 처리
+      # - name: Publishing fail
+      #   if: steps.github_deploy.outputs.published != 'true'
+      #   run: ...
 
-      # 배포가 성공한 경우 후속 처리
-      - name: Publishing success!
-        if: steps.github_deploy.outputs.published == 'true'
-        run: ... # 메일, 슬랙 메시지 전송 등... 필요 기능 추가
+      # # 배포가 성공한 경우 후속 처리
+      # - name: Publishing success!
+      #   if: steps.github_deploy.outputs.published == 'true'
+      #   run: ... # 메일, 슬랙 메시지 전송 등... 필요 기능 추가
