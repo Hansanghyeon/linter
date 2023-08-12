@@ -9,9 +9,25 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
+  is-run:
+    name: Release (npm)
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.is_run_changeset.outputs.result }}
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - id: is_run_changeset
+        run: |
+          echo "result=$(make is_run_changeset)" >> "$GITHUB_OUTPUT"
+
   npm-release:
     name: Release (npm)
     runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.is-run.outputs.result == 'true' }}
     steps:
       # 레포지토리에 체크아웃하여 소스를 가져온다.
       - name: Checkout branch
@@ -53,36 +69,30 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # postpublish에 outputs를 커스텀
+      - name: re_script
+        run: |
+          sed -i 's/"published"/"published=true" >> "$GITHUB_OUTPUT"/' Makefile
       - name: Publish
         id: npmPublish
         if: steps.changesets.outputs.hasChangesets == 'false'
         # 게시가 발생해야 할 때 작업을 수행할 수 있습니다.
         run: npm publish
 
-      - name: is_gh_release
-        id: is_ghrelease
-        run: echo ::set-output name=result::${{ steps.changesets.outputs.hasChangesets == 'false' && steps.npmPublish.outputs.published == 'true' }}
+      - id: is_gh_release
+        run: echo "is_gh_release=${{ steps.changesets.outputs.hasChangesets == 'false' && steps.npmPublish.outputs.published == 'true' }}" >> "$GITHUB_OUTPUT"
 
-      # id: npmPublish에 대해서 outputs을 디버깅하고싶다.
-      - name: Debug
-        run: echo ${{ steps.npmPublish.outputs }}
-
-
-      # # 해당 step은 항상실행되고
-      # # changeset의 PR을 생성하면 PR이라는 이름을 리턴
-      # # changeset의 PR을 생성하지 않으면서 배포를 성공한다면 DEPLOY라는 이름을 리턴
-      # - name: Deploy
-      #   id: deploy_success  # This step's ID
-      #   run: |
-      #     # Your deployment steps here
-      #     echo "Deployment succeeded"
-      #   continue-on-error: true  # Allow workflow to continue even if deployment fails
+      # steps.is_gh_release.outputs.is_gh_release가 true라면 PUBLISHED 라는 이름을 리턴
+      # steps.is_gh_release.outputs.is_gh_release가 false라면 PULL_REQUEST 이라는 이름을 리턴
+      - id: result
+        run: |
+          echo "result=${{ steps.is_gh_release.outputs.is_gh_release == 'true' ? 'PUBLISHED' : 'PULL_REQUEST' }}" >> "$GITHUB_OUTPUT"
 
   # github package에 배포하는 것은 메인 배포가 아니기 때문에 npm 배포가 정상적으로 완료된다면 github package에 배포한다.
   gh-release:
     name: Release (github package)
     needs: [npm-release]
-    if: ${{ needs.npm-release.outputs.is_ghrelease == 'true' }}
+    if: ${{ needs.npm-release.outputs.result == 'PUBLISHED' }}
     runs-on: ubuntu-latest
     steps:
       # 레포지토리에 체크아웃하여 소스를 가져온다.
@@ -124,7 +134,7 @@ jobs:
 
   #   steps:
   #     - name: Generate Notes
-  #       if: ${{ needs.job1.result == 'success' && needs.job2.result == 'success' }}
+  #       if: ${{ needs.npm-release.result == 'success' && needs.job2.result == 'success' }}
   #       run: |
   #         echo "Both job1 and job2 were successful. Notes generated."
       

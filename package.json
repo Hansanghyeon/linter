@@ -7,7 +7,8 @@
     "lint": "eslint . --config=eslintrc.json",
     "test": "npm run lint && tape test/*.js",
     "build": "nanobundle build",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "postpublish": "make postpublish"
   },
   "repository": {
     "type": "git",
