@@ -63,6 +63,11 @@ jobs:
         id: is_ghrelease
         run: echo ::set-output name=result::${{ steps.changesets.outputs.hasChangesets == 'false' && steps.npmPublish.outputs.published == 'true' }}
 
+      # id: npmPublish에 대해서 outputs을 디버깅하고싶다.
+      - name: Debug
+        run: echo ${{ steps.npmPublish.outputs }}
+
+
       # # 해당 step은 항상실행되고
       # # changeset의 PR을 생성하면 PR이라는 이름을 리턴
       # # changeset의 PR을 생성하지 않으면서 배포를 성공한다면 DEPLOY라는 이름을 리턴
