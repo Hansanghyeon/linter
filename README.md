@@ -1,25 +1,25 @@
 A rule set of hyeon's ESLint configurations
 
-- eslint:recommended [List of available rules - ESLint - Pluggable JavaScript linter](https://eslint.org/docs/rules/)
-- @typescript-eslint/recommended [typescript-eslint/packages/eslint-plugin at main · typescript-eslint/typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin)
+- 참고
+  - eslint:recommended [List of available rules - ESLint - Pluggable JavaScript linter](https://eslint.org/docs/rules/)
+  - @typescript-eslint/recommended [typescript-eslint/packages/eslint-plugin at main · typescript-eslint/typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/eslint-plugin)
 
 ## Installation
 
-```
+```shell
 npm install --save-dev @hyeon/eslint-config
 ```
 
-or
-
-```
+```shell
 yarn --dev @hyeon/eslint-config
 ```
 
 ## Usage
 
-### Javascript
+### @hyeon/eslint-config
 
-`.eslintrc.js`
+javascript 프로젝트에서 사용추천
+
 ```js
 module.exports = {
   extends: [
@@ -28,23 +28,10 @@ module.exports = {
 }
 ```
 
-`.eslintrc`
-```
-{
-  "extends": [
-    "@hyeon/eslint-config"
-  ]
-}
-```
-
 ### @hyeon/eslint-config/typescript
 
-> * @typescript-eslint/eslint-plugin
-> * typescript
+typescript 프로젝트에서 사용추천
 
-#### Typescript
-
-`.eslintrc.js`
 ```js
 module.exports = {
   extends: [
@@ -54,78 +41,37 @@ module.exports = {
 }
 ```
 
-`.eslintrc`
-```
-{
-  "extends": [
-    "@hyeon/eslint-config",
-    "@hyeon/eslint-config/typescript"
-  ]
-}
-```
-
 ### @hyeon/eslint-config/react
 
-> * eslint-plugin-react
+react 프로젝트에서 사용추천
 
-#### Javascript + React
-
-`.eslintrc.js`
 ```js
 {
   "extends": [
     '@hyeon/eslint-config',
+    // '@hyeon/eslint-config/typescript', // 타입스크립트 프로젝트에서 주석제거
     '@hyeon/eslint-config/react',
   ],
 }
 ```
 
-`.eslintrc`
-```
-{
-  "extends": [
-    "@hyeon/eslint-config",
-    "@hyeon/eslint-config/react"
-  ]
-}
-```
-
-#### Typescript + React
-
-`.eslintrc.js`
-```js
-module.exports = {
-  extends: [
-    '@hyeon/eslint-config',
-    '@hyeon/eslint-config/typescript',
-    '@hyeon/eslint-config/react'
-  ]
-}
-```
-
-`.eslintrc`
-```
-{
-  "extends": [
-    "@hyeon/eslint-config",
-    "@hyeon/eslint-config/typescript",
-    "@hyeon/eslint-config/react"
-  ]
-}
-```
-
 ### @hyeon/eslint-config/prettier
 
-> * eslint-plugin-prettier
-
-#### Prettier
-
-`.prettierrc`
 ```js
 {
   "extends": [
     '@hyeon/eslint-config',
     '@hyeon/eslint-config/prettier',
   ],
+}
+```
+
+### @hyeon/eslint-config/nextjs
+
+```js
+{
+  extends: [
+    '@hyeon/eslint-config/next',
+  ]
 }
 ```

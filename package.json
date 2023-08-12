@@ -1,7 +1,7 @@
 {
   "name": "@hyeon/eslint-config",
-  "version": "1.0.1",
-  "description": "ESLint configs for Javascript",
+  "version": "1.1.0",
+  "description": "Hansanghyun custom eslint settings",
   "main": "./lib/index.js",
   "scripts": {
     "lint": "eslint . --config=eslintrc.json",
@@ -17,7 +17,11 @@
     "eslint",
     "eslintconfig",
     "hyeon",
-    "javascript"
+    "javascript",
+    "react",
+    "nextjs",
+    "typescript",
+    "prettier"
   ],
   "author": "hyeon",
   "license": "MIT",
@@ -26,7 +30,7 @@
   },
   "homepage": "https://github.com/hyeon/eslint-config#readme",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^5.55.0",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^7.1.0",
@@ -71,6 +75,16 @@
       "source": "./lib/prettier.js",
       "require": "./lib/prettier.cjs",
       "import": "./lib/prettier.mjs"
+    },
+    "./prettier.config": {
+      "source": "./lib/prettier.config.js",
+      "require": "./lib/prettier.config.cjs",
+      "import": "./lib/prettier.config.mjs"
+    },
+    "./nextjs": {
+      "source": "./lib/nextjs.js",
+      "require": "./lib/nextjs.cjs",
+      "import": "./lib/nextjs.mjs"
     },
     "./package.json": "./package.json"
   },
