@@ -10,7 +10,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   is-run:
-    name: Release (npm)
+    name: Changesets를 시작할 것인가?
     runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.is_run_changeset.outputs.result }}
@@ -26,6 +26,7 @@ jobs:
   npm-release:
     name: Release (npm)
     runs-on: ubuntu-latest
+    needs: [is-run]
     outputs:
       result: ${{ steps.is-run.outputs.result == 'true' }}
     steps:
