@@ -8,4 +8,5 @@ check_version:
 	sh ./.github/config/check_version.sh
 
 is_run_changeset:
-	sh ./.github/config/is_run_changeset.sh
+	result=$$(sh ./.github/config/is_run_changeset.sh); \
+	echo "$$result"
