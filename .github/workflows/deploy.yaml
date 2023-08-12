@@ -22,7 +22,7 @@ jobs:
       - id: is_run_changeset
         run: |
           export result=$(make is_run_changeset)
-          echo "result=$result" >> "$GITHUB_OUTPUT"
+          echo "result=$result"
 
   npm-release:
     name: Release (npm)
