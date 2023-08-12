@@ -1,5 +1,11 @@
 # @hyeon/eslint-config
 
+## 1.2.0
+
+### Minor Changes
+
+- 2d83d40: nextjs 설정, prettier 기본 설정파일추가
+
 ## 1.1.2
 
 ### Patch Changes
