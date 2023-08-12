@@ -26,9 +26,9 @@
   "author": "hyeon",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hyeon/eslint-config/issues"
+    "url": "https://github.com/hansanghyeon/eslint-config/issues"
   },
-  "homepage": "https://github.com/hyeon/eslint-config#readme",
+  "homepage": "https://github.com/hansanghyeon/eslint-config#readme",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^5.55.0",
