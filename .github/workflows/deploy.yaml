@@ -60,6 +60,8 @@ jobs:
             echo "result=PULL_REQUEST, true, true" >> "$GITHUB_OUTPUT"
           elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "true" && "${{ steps.version.outputs.result }}" == "false" ]; then
             echo "result=PULL_REQUEST, true, false" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=${{ steps.version.outputs.result }}" >> "$GITHUB_OUTPUT"
           fi
 
   check-env:
