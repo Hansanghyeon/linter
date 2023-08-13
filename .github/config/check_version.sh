@@ -4,9 +4,9 @@
 version=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
 npm_version=$(npm view @hyeon/eslint-config version)
 
-# 두개의 버전이 같다면 false를 리턴한다
-if [ "$version" = "$npm_version" ]; then
-    echo "false"
-else
+# version이 npm_version보다 높아야한다
+if yarn semver $version -r ">$npm_version" ; then
     echo "true"
+else
+    echo "false"
 fi

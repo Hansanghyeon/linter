@@ -10,30 +10,75 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   is-run:
-    name: Changesets를 시작할 것인가?
+    name: Changesets RUN
     runs-on: ubuntu-latest
     outputs:
-      result: ${{ steps.is_run_changeset.outputs.result }}
+      result: ${{ steps.result.outputs.result }}
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - id: is_run_changeset
+      # Node.js를 설치한다.
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "lts/*"
+    
+      # Changeset을 실행하기 위해서 의존성을 설치한다.
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --ignore-engines
+        env:
+          CI: true
+
+      # Changesets에서 제공하는 Action을 사용할 수 있다.
+      # NPM에 배포, Git 태그 생성 등의 작업을 수행한다.
+      - name: Create release Pull Request or publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # PR 프로세스를 거쳐서 npm에 배포된 버전보다 소스코드의 버전이 높은지 확인한다.
+      - name: Check version
+        id: version
         run: |
-          export result=$(make is_run_changeset)\
+          result=$(make check_version)
           echo "result=$result" >> "$GITHUB_OUTPUT"
+
+      - id: result
+        # Changeset 기록이 없고 package 버전이 높다면 PUBLSIH
+        # Changeset 기록이 없고 package 버전이 같다면 ERROR
+        # Changeset 기록이 있고 package 버전이 높다면 PULL_REQUEST
+        # Changeset 기록이 있고 package 버전이 같다면 PULL_REQEUST
+        run: |
+          if [ "${{ steps.changesets.outputs.hasChangesets }}" == "false" && "${{ steps.version.outputs.result }}" == "true" ]; then
+            echo "result=PUBLISH" >> "$GITHUB_OUTPUT"
+          elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "false" && "${{ steps.version.outputs.result }}" == "false" ]; then
+            echo "result=ERROR" >> "$GITHUB_OUTPUT"
+          elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "true" && "${{ steps.version.outputs.result }}" == "true" ]; then
+            echo "result=PULL_REQUEST" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=PULL_REQUEST" >> "$GITHUB_OUTPUT"
+          fi
+
+  check-env:
+    name: Release (npm)
+    runs-on: ubuntu-latest
+    needs: [is-run]
+    env:
+      result: ${{ needs.is-run.outputs.result }}
+    steps:
+      - name: Check env
+        run: |
+          echo "result=$result"
 
   npm-release:
     name: Release (npm)
     runs-on: ubuntu-latest
     needs: [is-run]
-    if: ${{ needs.is-run.outputs.result == 'true' }}
+    if: ${{ needs.is-run.outputs.result == 'PUBLISH' }}
     steps:
-      - name: env check
-        env:
-          RESULT: ${{needs.is-run.outputs.result}}
-        run: echo "RESULT=$RESULT"
       # 레포지토리에 체크아웃하여 소스를 가져온다.
       - name: Checkout branch
         uses: actions/checkout@v2
@@ -56,14 +101,6 @@ jobs:
       - name: Build packages
         run: yarn build
 
-      # Changesets에서 제공하는 Action을 사용할 수 있다.
-      # NPM에 배포, Git 태그 생성 등의 작업을 수행한다.
-      - name: Create release Pull Request or publish to NPM
-        id: changesets
-        uses: changesets/action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       # 배포를 위해 .npmrc 파일을 생성하고 인증 토큰을 추가한다
       - name: NPM_TOKEN 설정
         if: steps.changesets.outputs.hasChangesets == 'false'
@@ -74,35 +111,14 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # postpublish에 outputs를 커스텀
-      - name: re_script
-        run: |
-          sed -i 's/"published"/"published=true" >> "$GITHUB_OUTPUT"/' Makefile
       - name: Publish
-        id: npmPublish
-        if: steps.changesets.outputs.hasChangesets == 'false'
-        # 게시가 발생해야 할 때 작업을 수행할 수 있습니다.
         run: npm publish
-
-      - id: is_gh_release
-        run: echo "is_gh_release=${{ steps.changesets.outputs.hasChangesets == 'false' && steps.npmPublish.outputs.published == 'true' }}"
-
-      # steps.is_gh_release.outputs.is_gh_release가 true라면 PUBLISHED 라는 이름을 리턴
-      # steps.is_gh_release.outputs.is_gh_release가 false라면 PULL_REQUEST 이라는 이름을 리턴
-      - name: Set result
-        id: result
-        run: |
-          if [ "${{ steps.is_gh_release.outputs.is_gh_release }}" == "true" ]; then
-            echo "result=PUBLISHED" >> "$GITHUB_OUTPUT"
-          else
-            echo "result=PULL_REQUEST" >> "$GITHUB_OUTPUT"
-          fi
 
   # github package에 배포하는 것은 메인 배포가 아니기 때문에 npm 배포가 정상적으로 완료된다면 github package에 배포한다.
   gh-release:
     name: Release (github package)
-    needs: [npm-release]
-    if: ${{ needs.npm-release.outputs.result == 'PUBLISHED' }}
+    needs: [is-run]
+    if: ${{ needs.is-run.outputs.result == 'PUBLISH' }}
     runs-on: ubuntu-latest
     steps:
       # 레포지토리에 체크아웃하여 소스를 가져온다.
@@ -138,18 +154,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # notification:
-  #   runs-on: ubuntu-latest
-  #   needs: [npm-release, gh-release]
-
-  #   steps:
-  #     - name: Generate Notes
-  #       if: ${{ needs.npm-release.result == 'success' && needs.job2.result == 'success' }}
-  #       run: |
-  #         echo "Both job1 and job2 were successful. Notes generated."
-      
-  #     - name: Handle Failure
-  #       if: ${{ needs.job1.result == 'failure' || needs.job2.result == 'failure' }}
-  #       run: |
-  #         echo "Either job1 or job2 (or both) failed. Handling failure."
-
+      - name: Publish
+        run: npm publish
