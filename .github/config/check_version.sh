@@ -5,8 +5,10 @@ version=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | s
 npm_version=$(npm view @hyeon/eslint-config version)
 
 # version이 npm_version보다 높아야한다
-if yarn semver $version -r ">$npm_version" ; then
-    echo "true"
-else
+yarn semver "$version" -r ">$npm_version"
+
+if [ $? -eq 1 ]; then
     echo "false"
+else
+    echo "true"
 fi

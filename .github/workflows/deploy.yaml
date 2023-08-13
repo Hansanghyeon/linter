@@ -43,8 +43,7 @@ jobs:
       - name: Check version
         id: version
         run: |
-          result=$(make check_version)\
-          echo "result=$result"\
+          export result=$(make is_run)\
           echo "result=$result" >> "$GITHUB_OUTPUT"
 
       - id: result
