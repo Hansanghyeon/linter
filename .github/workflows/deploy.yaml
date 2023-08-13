@@ -57,9 +57,9 @@ jobs:
           elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "false" && "${{ steps.version.outputs.result }}" == "false" ]; then
             echo "result=ERROR" >> "$GITHUB_OUTPUT"
           elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "true" && "${{ steps.version.outputs.result }}" == "true" ]; then
-            echo "result=PULL_REQUEST" >> "$GITHUB_OUTPUT"
-          else
-            echo "result=PULL_REQUEST" >> "$GITHUB_OUTPUT"
+            echo "result=PULL_REQUEST, true, true" >> "$GITHUB_OUTPUT"
+          elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "true" && "${{ steps.version.outputs.result }}" == "false" ]; then
+            echo "result=PULL_REQUEST, true, false" >> "$GITHUB_OUTPUT"
           fi
 
   check-env:
