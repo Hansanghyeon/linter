@@ -23,7 +23,7 @@ javascript 프로젝트에서 사용추천
 ```js
 module.exports = {
   extends: [
-    '@hyeon/eslint-config'
+    "@hyeon/eslint-config"
   ]
 }
 ```
@@ -35,8 +35,8 @@ typescript 프로젝트에서 사용추천
 ```js
 module.exports = {
   extends: [
-    '@hyeon/eslint-config',
-    '@hyeon/eslint-config/typescript'
+    "@hyeon/eslint-config",
+    "@hyeon/eslint-config/typescript"
   ]
 }
 ```
@@ -48,9 +48,9 @@ react 프로젝트에서 사용추천
 ```js
 {
   "extends": [
-    '@hyeon/eslint-config',
-    // '@hyeon/eslint-config/typescript', // 타입스크립트 프로젝트에서 주석제거
-    '@hyeon/eslint-config/react',
+    "@hyeon/eslint-config",
+    // "@hyeon/eslint-config/typescript", // 타입스크립트 프로젝트에서 주석제거
+    "@hyeon/eslint-config/react",
   ],
 }
 ```
@@ -60,8 +60,8 @@ react 프로젝트에서 사용추천
 ```js
 {
   "extends": [
-    '@hyeon/eslint-config',
-    '@hyeon/eslint-config/prettier',
+    "@hyeon/eslint-config",
+    "@hyeon/eslint-config/prettier",
   ],
 }
 ```
@@ -71,7 +71,7 @@ react 프로젝트에서 사용추천
 ```js
 {
   extends: [
-    '@hyeon/eslint-config/next',
+    "@hyeon/eslint-config/nextjs",
   ]
 }
 ```
