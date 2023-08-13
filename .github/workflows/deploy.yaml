@@ -6,7 +6,7 @@ on:
     paths:
       - ".changeset/**"
       - "src/**/*.js"
-      - "READEMD.md"
+      - "README.md"
     branches:
       - main
 
