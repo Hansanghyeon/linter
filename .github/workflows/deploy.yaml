@@ -53,13 +53,13 @@ jobs:
         # Changeset 기록이 있고 package 버전이 높다면 PULL_REQUEST
         # Changeset 기록이 있고 package 버전이 같다면 PULL_REQEUST
         run: |
-          if [ "${{ steps.changesets.outputs.hasChangesets }}" == "false" && "${{ steps.version.outputs.result }}" == "true" ]; then
+          if [ "${{ steps.changesets.outputs.hasChangesets }}" == "false" ] && [ "${{ steps.version.outputs.result }}" == "true" ]; then
             echo "result=PUBLISH" >> "$GITHUB_OUTPUT"
-          elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "false" && "${{ steps.version.outputs.result }}" == "false" ]; then
+          elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "false" ] && [ "${{ steps.version.outputs.result }}" == "false" ]; then
             echo "result=ERROR" >> "$GITHUB_OUTPUT"
-          elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "true" && "${{ steps.version.outputs.result }}" == "true" ]; then
+          elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "true" ] && [ "${{ steps.version.outputs.result }}" == "true" ]; then
             echo "result=PULL_REQUEST, true, true" >> "$GITHUB_OUTPUT"
-          elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "true" && "${{ steps.version.outputs.result }}" == "false" ]; then
+          elif [ "${{ steps.changesets.outputs.hasChangesets }}" == "true" ] && [ "${{ steps.version.outputs.result }}" == "false" ]; then
             echo "result=PULL_REQUEST, true, false" >> "$GITHUB_OUTPUT"
           else
             echo "result=${{ steps.version.outputs.result }}" >> "$GITHUB_OUTPUT"
