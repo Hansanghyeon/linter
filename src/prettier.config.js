@@ -1,11 +1,9 @@
-module.export = {
-  arrowParens: "avoid",
-  bracketSpacing: true,
-  jsxBracketSameLine: false,
-  printWidth: 80,
+module.exports = {
   semi: false,
+  trailingComma: 'es5',
   singleQuote: true,
+  printWidth: 80,
   tabWidth: 2,
-  trailingComma: "all",
-  useTabs: false
+  arrowParens: 'always',
+  jsxSingleQuote: false,
 }
