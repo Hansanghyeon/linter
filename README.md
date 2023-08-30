@@ -66,6 +66,14 @@ react 프로젝트에서 사용추천
 }
 ```
 
+#### @hyeon/eslint-config/prettier-config
+
+```
+// .prettierrc.cjs
+module.export = require('@hyeon/eslint-config/prettier.config')
+```
+
+
 ### @hyeon/eslint-config/nextjs
 
 ```js
