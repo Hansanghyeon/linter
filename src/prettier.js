@@ -13,9 +13,14 @@ module.exports = {
     'prettier',
   ],
   rules: {
-    'prettier/prettier': ['error', {
-      trailingComma: 'all',
+    "prettier/prettier": ["error", {
+      trailingComma: "all",
       singleQuote: true,
+      semi: false,
+      printWidth: 80,
+      tabWidth: 2,
+      arrowParens: "always",
+      jsxSingleQuote: false
     }],
     'arrow-body-style': ['error', 'as-needed'],
     'prefer-arrow-callback': 'error',
