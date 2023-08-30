@@ -11,7 +11,11 @@ npm install --save-dev @hyeon/eslint-config
 ```
 
 ```shell
-yarn --dev @hyeon/eslint-config
+yarn add --save-dev @hyeon/eslint-config
+```
+
+```shell
+pnpm add --save-dev @hyeon/eslint-config
 ```
 
 ## Usage
