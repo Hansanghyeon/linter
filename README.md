@@ -46,7 +46,7 @@ module.exports = {
 react 프로젝트에서 사용추천
 
 ```js
-{
+module.exports = {
   "extends": [
     "@hyeon/eslint-config",
     // "@hyeon/eslint-config/typescript", // 타입스크립트 프로젝트에서 주석제거
@@ -58,7 +58,7 @@ react 프로젝트에서 사용추천
 ### @hyeon/eslint-config/prettier
 
 ```js
-{
+module.exports = {
   "extends": [
     "@hyeon/eslint-config",
     "@hyeon/eslint-config/prettier",
@@ -77,7 +77,7 @@ module.export = require('@hyeon/eslint-config/prettier.config')
 ### @hyeon/eslint-config/nextjs
 
 ```js
-{
+module.exports = {
   extends: [
     "@hyeon/eslint-config/nextjs",
   ]
