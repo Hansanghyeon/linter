@@ -1,5 +1,11 @@
 # @hyeon/eslint-config
 
+## 3.0.0
+
+### Major Changes
+
+- c7c1a76: package upgrade
+
 ## 2.0.0
 
 ### Major Changes
