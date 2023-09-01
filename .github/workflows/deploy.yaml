@@ -101,6 +101,10 @@ jobs:
         with:
           node-version: "lts/*"
 
+      # install pnpm
+      - name: Install package management
+        run: npm i -g pnpm
+
       # 빌드 및 테스트를 위해서 의존성을 설치한다.
       - name: Install dependencies
         run: pnpm i
@@ -142,6 +146,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "lts/*"
+
+      # install pnpm
+      - name: Install package management
+        run: npm i -g pnpm
 
       # @hyeon 또는 @*/* 패키지를 Github에 배포하기위해서 @Hansanghyeon:*로 이름을 변경한다
       - name: Rename package name
