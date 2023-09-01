@@ -10,6 +10,8 @@ on:
       - "README.md"
     branches:
       - main
+  # 수동배포
+  workflow_dispatch:
 
 jobs:
   is-run:
