@@ -6,3 +6,6 @@ check_version:
 
 is_run:
 	sh ./.github/config/is_run.sh
+
+install:
+	pnpm i
