@@ -1,5 +1,11 @@
 # @hyeon/eslint-config
 
+## 2.0.0
+
+### Major Changes
+
+- 15be20e: prettier config eslint룰 안쪽으로 변경
+
 ## 1.2.0
 
 ### Minor Changes
