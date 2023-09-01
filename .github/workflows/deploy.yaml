@@ -27,6 +27,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "lts/*"
+
+      # install pnpm
+      - name: Install package management
+        run: npm i -g pnpm
     
       # Changeset을 실행하기 위해서 의존성을 설치한다.
       - name: Install dependencies
