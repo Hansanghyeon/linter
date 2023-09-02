@@ -1,5 +1,11 @@
 # @hyeon/eslint-config
 
+## 4.0.0
+
+### Major Changes
+
+- 7526206: prettier 따로 추가하는 방법으로 변경
+
 ## 3.0.2
 
 ### Patch Changes
