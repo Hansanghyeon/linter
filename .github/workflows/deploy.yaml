@@ -5,13 +5,10 @@ on:
   push:
     paths:
       - ".changeset/**"
-      - ".github/workflows/deploy.yaml"
       - "src/**/*.js"
       - "README.md"
     branches:
       - main
-  # 수동배포
-  workflow_dispatch:
 
 jobs:
   is-run:
@@ -29,14 +26,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "lts/*"
-
-      # install pnpm
-      - name: Install package management
-        run: npm i -g pnpm
     
       # Changeset을 실행하기 위해서 의존성을 설치한다.
       - name: Install dependencies
-        run: pnpm i
+        run: yarn install --frozen-lockfile --ignore-engines
         env:
           CI: true
 
@@ -103,19 +96,15 @@ jobs:
         with:
           node-version: "lts/*"
 
-      # install pnpm
-      - name: Install package management
-        run: npm i -g pnpm
-
       # 빌드 및 테스트를 위해서 의존성을 설치한다.
       - name: Install dependencies
-        run: pnpm i
+        run: yarn install --frozen-lockfile --ignore-engines
         env:
           CI: true
 
       # 패키지를 빌드한다.
       - name: Build packages
-        run: pnpm build
+        run: yarn build
 
       # 배포를 위해 .npmrc 파일을 생성하고 인증 토큰을 추가한다
       - name: NPM_TOKEN 설정
@@ -149,10 +138,6 @@ jobs:
         with:
           node-version: "lts/*"
 
-      # install pnpm
-      - name: Install package management
-        run: npm i -g pnpm
-
       # @hyeon 또는 @*/* 패키지를 Github에 배포하기위해서 @Hansanghyeon:*로 이름을 변경한다
       - name: Rename package name
         run: |
@@ -160,7 +145,7 @@ jobs:
 
       # 빌드 및 테스트를 위해서 의존성을 설치한다.
       - name: Install dependencies
-        run: pnpm i
+        run: yarn install --frozen-lockfile --ignore-engines
         env:
           CI: true
 
