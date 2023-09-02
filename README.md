@@ -58,32 +58,3 @@ module.exports = {
   ],
 }
 ```
-
-### @hyeon/eslint-config/prettier
-
-```js
-module.exports = {
-  "extends": [
-    "@hyeon/eslint-config",
-    "@hyeon/eslint-config/prettier",
-  ],
-}
-```
-
-#### @hyeon/eslint-config/prettier-config
-
-```js
-// .prettierrc.cjs
-module.export = require('@hyeon/eslint-config/prettier.config')
-```
-
-
-### @hyeon/eslint-config/nextjs
-
-```js
-module.exports = {
-  extends: [
-    "@hyeon/eslint-config/nextjs",
-  ]
-}
-```

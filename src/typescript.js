@@ -1,10 +1,12 @@
 module.exports = {
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    '@hyeon/eslint-config/prettier',
+    'prettier/@typescript-eslint',
+  ],
   plugins: [
     '@typescript-eslint',
     'import'
-  ],
-  extends: [
-    'plugin:@typescript-eslint/recommended'
   ],
   settings: {
     "import/parsers": {

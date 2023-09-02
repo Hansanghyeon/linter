@@ -2,7 +2,10 @@ module.exports = {
   env: {
     es2021: true,
   },
-  extends: ['eslint:recommended'],
+  extends: [
+    'eslint:recommended',
+    '@hyeon/eslint-config/prettier'
+  ],
   rules: {
     camelcase: [
       'error',
