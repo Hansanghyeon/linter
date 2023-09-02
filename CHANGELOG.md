@@ -1,5 +1,12 @@
 # @hyeon/eslint-config
 
+## 3.0.1
+
+### Patch Changes
+
+- 817e1c3: 버전매니저 변경
+- 40bd4ad: remove nextjs, prettier 모두통합
+
 ## 3.0.0
 
 ### Major Changes
