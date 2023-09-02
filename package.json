@@ -69,16 +69,6 @@
       "require": "./lib/react.cjs",
       "import": "./lib/react.mjs"
     },
-    "./prettier.config": {
-      "source": "./lib/prettier.config.js",
-      "require": "./lib/prettier.config.cjs",
-      "import": "./lib/prettier.config.mjs"
-    },
-    "./nextjs": {
-      "source": "./lib/nextjs.js",
-      "require": "./lib/nextjs.cjs",
-      "import": "./lib/nextjs.mjs"
-    },
     "./package.json": "./package.json"
   },
   "files": [
