@@ -108,7 +108,6 @@ jobs:
 
       # 배포를 위해 .npmrc 파일을 생성하고 인증 토큰을 추가한다
       - name: NPM_TOKEN 설정
-        if: steps.changesets.outputs.hasChangesets == 'false'
         run: |
           cat << EOF > "$HOME/.npmrc"
             //registry.npmjs.org/:_authToken=$NPM_TOKEN

@@ -4,7 +4,6 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    '@hyeon/eslint-config/prettier'
   ],
   rules: {
     camelcase: [

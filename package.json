@@ -1,6 +1,6 @@
 {
   "name": "@hyeon/eslint-config",
-  "version": "3.0.2",
+  "version": "3.0.0",
   "description": "Hansanghyun custom eslint settings",
   "main": "./lib/index.js",
   "scripts": {
@@ -68,6 +68,11 @@
       "source": "./lib/react.js",
       "require": "./lib/react.cjs",
       "import": "./lib/react.mjs"
+    },
+    "./prettier": {
+      "source": "./lib/prettier.js",
+      "require": "./lib/prettier.cjs",
+      "import": "./lib/prettier.mjs"
     },
     "./package.json": "./package.json"
   },
