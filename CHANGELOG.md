@@ -1,5 +1,11 @@
 # @hyeon/eslint-config
 
+## 4.1.2
+
+### Patch Changes
+
+- f45590f: ci/cd test get version
+
 ## 4.1.1
 
 ### Patch Changes
