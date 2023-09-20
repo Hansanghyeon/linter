@@ -1,0 +1,34 @@
+name: 테스트
+
+# .changeset, packages 디렉토리의 변경사항들이 main 브렌치에 push될때 이벤트를 실행한다. 
+on:
+  push:
+    paths:
+      - ".changeset/**"
+      - "src/**/*.js"
+      - "README.md"
+    branches:
+      - test
+
+jobs:
+  release:
+    name: 🚀 릴리즈
+    runs-on: ubuntu-latest
+    steps:
+      # package.json의 버전을 가져온다.
+      - name: package.json에서 버전 가져오기
+        id: version
+        run: |
+          result=$(make get_version | tail -1)
+          echo "version=$result" >> "$GITHUB_OUTPUT"
+      - name: Release 생성
+        id: create_release
+        uses: actions/create-release@v1
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          tag_name: ${{ steps.version.outputs.version }}
+          release_name: ${{ steps.version.outputs.version }}
+          body: |
+            ${{ steps.version.outputs.version }} 릴리즈
+            NPM: https://www.npmjs.com/package/@hyeon/eslint-config/v/${{ steps.version.outputs.version }}
