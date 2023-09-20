@@ -18,7 +18,7 @@ jobs:
       version: ${{ steps.version.outputs.result }}
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
       # package.json의 버전을 가져온다.
