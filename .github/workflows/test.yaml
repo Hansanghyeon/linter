@@ -22,7 +22,7 @@ jobs:
         id: version
         run: |
           result=$(make get_version | tail -1)
-          echo "version=$result" >> "$GITHUB_OUTPUT"
+          echo "result=$result" >> "$GITHUB_OUTPUT"
   release:
     name: 🚀 릴리즈
     runs-on: ubuntu-latest
