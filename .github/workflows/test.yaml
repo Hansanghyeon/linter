@@ -16,6 +16,7 @@ jobs:
         id: version
         run: |
           result=$(make get_version | tail -1)
+          echo "$result"
           echo "version=$result" >> "$GITHUB_OUTPUT"
       - name: Release 생성
         id: create_release
