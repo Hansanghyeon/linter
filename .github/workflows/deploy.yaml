@@ -12,7 +12,7 @@ on:
 
 jobs:
   set_env:
-    name: Changesets RUN
+    name: 🏃‍♀️ 액션 커스텀 전역변수 설정
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.result }}
@@ -29,7 +29,7 @@ jobs:
           echo "result=$result" >> "$GITHUB_OUTPUT"
 
   is-run:
-    name: Changesets RUN
+    name: 🏃‍♀️ Changesets 실행
     runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.result.outputs.result }}
@@ -85,7 +85,7 @@ jobs:
           fi
 
   check-env:
-    name: GITHUB OUTPUT 환경변수 확인
+    name: 🔎 액션 커스텀 전역변수 확인
     runs-on: ubuntu-latest
     needs: [is-run, set_env]
     env:
@@ -97,7 +97,7 @@ jobs:
           echo "result=$result"
 
   npm-release:
-    name: Release (npm)
+    name: 🚀 NPM 패키지배포
     runs-on: ubuntu-latest
     needs: [is-run]
     if: ${{ needs.is-run.outputs.result == 'PUBLISH' }}
@@ -137,7 +137,7 @@ jobs:
 
   # github package에 배포하는 것은 메인 배포가 아니기 때문에 npm 배포가 정상적으로 완료된다면 github package에 배포한다.
   gh-release:
-    name: Release (github package)
+    name: 🚀 깃허브 패키지배포
     needs: [is-run]
     if: ${{ needs.is-run.outputs.result == 'PUBLISH' }}
     runs-on: ubuntu-latest
