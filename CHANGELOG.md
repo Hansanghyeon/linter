@@ -1,5 +1,11 @@
 # @hyeon/eslint-config
 
+## 4.1.0
+
+### Minor Changes
+
+- 1356638: nodejs to bun and @typescript-eslint/eslint-plugin version update
+
 ## 4.0.0
 
 ### Major Changes
