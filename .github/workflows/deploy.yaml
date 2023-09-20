@@ -164,7 +164,6 @@ jobs:
       # 그리고 배포완료된 주소를 가져온다
       - name: Publish
         run: npm publish
-          
 
   release:
     name: 🚀 릴리즈
@@ -175,8 +174,8 @@ jobs:
       - name: package.json에서 버전 가져오기
         id: version
         run: |
-          echo "version=$(cat package.json | jq -r '.version')" >> "$GITHUB_OUTPUT"
-      
+          result=$(make get_version | tail -1)
+          echo "version=$result" >> "$GITHUB_OUTPUT"
       - name: Release 생성
         id: create_release
         uses: actions/create-release@v1
