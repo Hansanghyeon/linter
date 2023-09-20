@@ -7,6 +7,10 @@ A rule set of hyeon's ESLint configurations
 ## Installation
 
 ```shell
+bun install --save-dev @hyeon/eslint-config
+```
+
+```shell
 npm install --save-dev @hyeon/eslint-config
 ```
 
@@ -17,6 +21,7 @@ yarn add --save-dev @hyeon/eslint-config
 ```shell
 pnpm add --save-dev @hyeon/eslint-config
 ```
+
 
 ## Usage
 
