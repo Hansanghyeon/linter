@@ -1,5 +1,12 @@
 # @hyeon/eslint-config
 
+## 4.1.3
+
+### Patch Changes
+
+- 95bc7f3: fix: bun typescript defaul
+  REF: https://github.com/oven-sh/bun/issues/5128
+
 ## 4.1.2
 
 ### Patch Changes
