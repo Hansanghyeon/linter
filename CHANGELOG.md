@@ -1,5 +1,11 @@
 # @hyeon/eslint-config
 
+## 4.1.1
+
+### Patch Changes
+
+- 1e500b2: ci/cd구축완료
+
 ## 4.1.0
 
 ### Minor Changes
