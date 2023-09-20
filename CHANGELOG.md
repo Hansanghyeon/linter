@@ -1,5 +1,11 @@
 # @hyeon/eslint-config
 
+## 5.0.0
+
+### Major Changes
+
+- 48519ea: prettier/@typescript-eslint는 eslint-config-prettier v8.0.0에서 지워졌다.
+
 ## 4.1.3
 
 ### Patch Changes
