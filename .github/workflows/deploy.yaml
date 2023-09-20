@@ -90,21 +90,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Node.js를 설치한다.
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      # bun 설치한다.
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: "lts/*"
+          bun-version: latest
 
       # 빌드 및 테스트를 위해서 의존성을 설치한다.
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --ignore-engines
+        run: bun install
         env:
           CI: true
 
       # 패키지를 빌드한다.
       - name: Build packages
-        run: yarn build
+        run: bun run build
 
       # 배포를 위해 .npmrc 파일을 생성하고 인증 토큰을 추가한다
       - name: NPM_TOKEN 설정
@@ -131,22 +130,25 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Node.js를 설치한다.
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "lts/*"
-
       # @hyeon 또는 @*/* 패키지를 Github에 배포하기위해서 @Hansanghyeon:*로 이름을 변경한다
       - name: Rename package name
         run: |
           sed -i 's/"@hyeon\/eslint-config"/"@hansanghyeon\/eslint-config"/' package.json
+      
+          # bun 설치한다.
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
       # 빌드 및 테스트를 위해서 의존성을 설치한다.
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --ignore-engines
+        run: bun install
         env:
           CI: true
+
+      # 패키지를 빌드한다.
+      - name: Build packages
+        run: bun run build
 
       # 배포를 위해 .npmrc 파일을 생성하고 인증 토큰을 추가한다.
       - name: Configure npm
