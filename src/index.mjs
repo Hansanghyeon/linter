@@ -11,10 +11,11 @@ export default [
         },
       ],
       'class-methods-use-this': 'off',
-      'max-len': [
-        'warn',
-        120,
-      ],
+      // tailwindcss를 사용하기때문에 최대길이 제한은 제거함
+      // 'max-len': [
+      //   'warn',
+      //   120,
+      // ],
       'no-multi-spaces': [
         'error',
         {

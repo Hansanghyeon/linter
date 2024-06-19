@@ -1,18 +1,31 @@
-import reactRecommended from 'eslint-plugin-react/configs/recommended.js'
+import react from 'eslint-plugin-react'
+import reactJsxruntime from 'eslint-plugin-react/configs/jsx-runtime.js'
+import typescriptEslint from '@typescript-eslint/eslint-plugin'
+import typescriptParser from '@typescript-eslint/parser'
 import globals from 'globals'
+
 
 export default [
   {
     files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
-    ...reactRecommended,
-  },
-  {
-    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    ...reactJsxruntime,
     languageOptions: {
+      ...reactJsxruntime.languageOptions,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
       globals: {
-        ...globals.serviceworker,
         ...globals.browser,
       },
+    },
+    plugins: {
+      react,
+      "@typescript-eslint": typescriptEslint,
     },
     rules: {
       'react/jsx-filename-extension': [

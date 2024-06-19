@@ -25,45 +25,31 @@ pnpm add --save-dev @hyeon/eslint-config
 
 ## Usage
 
-### @hyeon/eslint-config
-
-javascript 프로젝트에서 사용추천
+- 🟩 react + typescript
 
 ```js
-module.exports = {
-  extends: [
-    "@hyeon/eslint-config",
-    // "@hyeon/eslint-config/prettier"
-  ]
-}
+import hyeonEslintConfigBase from '@hyeon/eslint-config'
+import hyeonEslintConfigReact from '@hyeon/eslint-config/react'
+import hyeonEslintConfigPrettier from '@hyeon/eslint-config/prettier'
+
+export default [
+  ...hyeonEslintConfigBase,
+  ...hyeonEslintConfigReact,
+  ...hyeonEslintConfigPrettier,
+]
 ```
 
-### @hyeon/eslint-config/typescript
-
-typescript 프로젝트에서 사용추천
-
-```js
-module.exports = {
-  extends: [
-    "@hyeon/eslint-config",
-    "@hyeon/eslint-config/typescript",
-    // "@hyeon/eslint-config/prettier"
-  ]
-}
-```
-
-### @hyeon/eslint-config/react
-
-react 프로젝트에서 사용추천
+- 🟩 typescript
+- 🟥 react
 
 ```js
-module.exports = {
-  "extends": [
-    "@hyeon/eslint-config",
-    // "@hyeon/eslint-config/typescript", // 타입스크립트 프로젝트에서 주석제거
-    "@hyeon/eslint-config/react",
-    // '@hyeon/eslint-config/prettier',
-    // 'prettier/react',
-  ],
-}
+import hyeonEslintConfigBase from '@hyeon/eslint-config'
+import hyeonEslintConfigTypescript from '@hyeon/eslint-config/typescript'
+import hyeonEslintConfigPrettier from '@hyeon/eslint-config/prettier'
+
+export default [
+  ...hyeonEslintConfigBase,
+  ...hyeonEslintConfigTypescript,
+  ...hyeonEslintConfigPrettier,
+]
 ```

@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "@hyeon/eslint-config": "^6.0.14",
+    "@hyeon/eslint-config": "^6.0.23",
     "eslint": "^9.5.0",
     "eslint-plugin-prettier": "^5.1.3"
   },
