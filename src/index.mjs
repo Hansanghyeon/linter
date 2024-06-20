@@ -1,27 +1,11 @@
-import js from "@eslint/js";
+import hyeonEslintConfigBase from './base.mjs'
+import hyeonEslintConfigPrettier from './prettier.mjs'
+import hyeonEslintConfigReact from './react.mjs'
+import hyeonEslintConfigTypescript from './typescript.mjs'
 
-export default [
-  js.configs.recommended,
-  {
-    rules: {
-      camelcase: [
-        'error',
-        {
-          properties: 'never',
-        },
-      ],
-      'class-methods-use-this': 'off',
-      // tailwindcss를 사용하기때문에 최대길이 제한은 제거함
-      // 'max-len': [
-      //   'warn',
-      //   120,
-      // ],
-      'no-multi-spaces': [
-        'error',
-        {
-          ignoreEOLComments: true,
-        },
-      ],
-    },
-  }
-];
+export default {
+  recommended: hyeonEslintConfigBase,
+  prettier: hyeonEslintConfigPrettier,
+  react: hyeonEslintConfigReact,
+  typescript: hyeonEslintConfigTypescript,
+}

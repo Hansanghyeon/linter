@@ -2,7 +2,6 @@ import react from 'eslint-plugin-react'
 import reactJsxruntime from 'eslint-plugin-react/configs/jsx-runtime.js'
 import typescriptEslint from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
-import globals from 'globals'
 
 
 export default [
@@ -18,9 +17,6 @@ export default [
         ecmaFeatures: {
           jsx: true,
         },
-      },
-      globals: {
-        ...globals.browser,
       },
     },
     plugins: {

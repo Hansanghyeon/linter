@@ -28,14 +28,24 @@ pnpm add --save-dev @hyeon/eslint-config
 - 🟩 react + typescript
 
 ```js
-import hyeonEslintConfigBase from '@hyeon/eslint-config'
+import hyeonEslintConfigRecommended from '@hyeon/eslint-config/recommended'
 import hyeonEslintConfigReact from '@hyeon/eslint-config/react'
 import hyeonEslintConfigPrettier from '@hyeon/eslint-config/prettier'
 
 export default [
-  ...hyeonEslintConfigBase,
+  ...hyeonEslintConfigRecommended,
   ...hyeonEslintConfigReact,
   ...hyeonEslintConfigPrettier,
+]
+```
+
+```js
+import hyeonEslintConfig from '@hyeon/eslint-config'
+
+export default [
+  ...hyeonEslintConfig.recommended,
+  ...hyeonEslintConfig.react,
+  ...hyeonEslintConfig.prettier,
 ]
 ```
 
@@ -43,13 +53,23 @@ export default [
 - 🟥 react
 
 ```js
-import hyeonEslintConfigBase from '@hyeon/eslint-config'
+import hyeonEslintConfigRecommended from '@hyeon/eslint-config/recommended'
 import hyeonEslintConfigTypescript from '@hyeon/eslint-config/typescript'
 import hyeonEslintConfigPrettier from '@hyeon/eslint-config/prettier'
 
 export default [
-  ...hyeonEslintConfigBase,
+  ...hyeonEslintConfigRecommended,
   ...hyeonEslintConfigTypescript,
   ...hyeonEslintConfigPrettier,
+]
+```
+
+```js
+import hyeonEslintConfig from '@hyeon/eslint-config'
+
+export default [
+  ...hyeonEslintConfig.recommended,
+  ...hyeonEslintConfig.typescript,
+  ...hyeonEslintConfig.prettier,
 ]
 ```
