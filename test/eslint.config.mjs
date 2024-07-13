@@ -1,9 +1,7 @@
-import hyeonEslintConfigBase from '@hyeon/eslint-config'
-import hyeonEslintConfigReact from '@hyeon/eslint-config/react'
-import hyeonEslintConfigPrettier from '@hyeon/eslint-config/prettier'
+import hyeonEslintConfig from '@hyeon/eslint-config'
 
 export default [
-  ...hyeonEslintConfigBase,
-  ...hyeonEslintConfigReact,
-  ...hyeonEslintConfigPrettier,
+  ...hyeonEslintConfig.recommended,
+  ...hyeonEslintConfig.typescript,
+  ...hyeonEslintConfig.prettier,
 ]
