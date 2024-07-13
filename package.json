@@ -1,6 +1,6 @@
 {
   "name": "@hyeon/eslint-config",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "Hansanghyun custom eslint settings",
   "main": "./src/index.mjs",
   "scripts": {
@@ -43,6 +43,7 @@
   "devDependencies": {
     "@actions/exec": "^1.1.1",
     "@changesets/cli": "^2.26.2",
+    "eslint": "^8.57.0",
     "semver": "^7.5.4"
   },
   "exports": {
@@ -62,6 +63,5 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
-  },
-  "packageManager": "yarn@4.3.1"
+  }
 }
