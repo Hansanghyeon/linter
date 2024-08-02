@@ -1,11 +1,8 @@
 import stylisticJs from '@stylistic/eslint-plugin-js'
-import stylisticJsx from '@stylistic/eslint-plugin-jsx'
 
 export default [
   {
-    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
     plugins: {
-      '@stylistic/jsx': stylisticJsx,
       '@stylistic/js': stylisticJs,
     },
     rules: {
@@ -20,7 +17,6 @@ export default [
           ImportDeclaration: true,
         },
       }],
-      '@stylistic/js/jsx-quotes': ['error', "prefer-double"],
-     },
+    },
   },
-]
+];

@@ -1,11 +1,13 @@
 import hyeonEslintConfigBase from './base.mjs'
-import hyeonEslintConfigPrettier from './prettier.mjs'
+import hyeonEslintConfigJs from './js.mjs'
 import hyeonEslintConfigReact from './react.mjs'
 import hyeonEslintConfigTypescript from './typescript.mjs'
+import hyeonEslintConfigPlus from './plus.mjs'
 
 export default {
-  recommended: hyeonEslintConfigBase,
-  prettier: hyeonEslintConfigPrettier,
+  base: hyeonEslintConfigBase,
+  js: hyeonEslintConfigJs,
   react: hyeonEslintConfigReact,
   typescript: hyeonEslintConfigTypescript,
+  plus: hyeonEslintConfigPlus
 }
