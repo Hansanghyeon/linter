@@ -1,6 +1,6 @@
 {
   "name": "@hyeon/eslint-config",
-  "version": "7.0.12",
+  "version": "7.0.17",
   "description": "Hansanghyun custom eslint settings",
   "main": "./src/index.mjs",
   "scripts": {

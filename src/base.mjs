@@ -32,19 +32,12 @@ export default [
       "simple-import-sort": simpleImportSort,
     },
     rules: {
-      "simple-import-sort/imports": [
-        "error",
-        {
-          "groups": [
-            // 그룹 설정을 비움
-          ],
-        }
-      ],
+      "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "import/first": "error",
       "import/newline-after-import": "error",
       "import/no-duplicates": "error",
-      "import/no-unresolved": [2, { ignore: ['\\.img$', '\\.svg$'] }]
+      "import/no-unresolved": "off"
     },
   }
 ];
