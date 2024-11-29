@@ -1,7 +1,10 @@
-import js from "@eslint/js";
+import js from '@eslint/js';
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import importPlugin from 'eslint-plugin-import';
 
 export default [
   js.configs.recommended,
+  importPlugin.flatConfigs.recommended,
   {
     rules: {
       camelcase: [
@@ -22,6 +25,26 @@ export default [
           ignoreEOLComments: true,
         },
       ],
+    },
+  },
+  {
+    plugins: {
+      "simple-import-sort": simpleImportSort,
+    },
+    rules: {
+      "simple-import-sort/imports": [
+        "error",
+        {
+          "groups": [
+            // 그룹 설정을 비움
+          ],
+        }
+      ],
+      "simple-import-sort/exports": "error",
+      "import/first": "error",
+      "import/newline-after-import": "error",
+      "import/no-duplicates": "error",
+      "import/no-unresolved": [2, { ignore: ['\\.img$', '\\.svg$'] }]
     },
   }
 ];

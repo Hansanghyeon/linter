@@ -1,6 +1,6 @@
 {
   "name": "@hyeon/eslint-config",
-  "version": "6.0.35",
+  "version": "7.0.12",
   "description": "Hansanghyun custom eslint settings",
   "main": "./src/index.mjs",
   "scripts": {
@@ -29,16 +29,18 @@
   },
   "homepage": "https://github.com/hansanghyeon/eslint-config#readme",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "@typescript-eslint/parser": "^7.13.1",
+    "@typescript-eslint/eslint-plugin": "^8.16.0",
+    "@typescript-eslint/parser": "^8.16.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-react": "^7.34.3",
-    "typescript-eslint": "^7.13.1"
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "typescript-eslint": "^8.16.0"
   },
   "peerDependencies": {
     "eslint": "^9.5.0",
-    "prettier": "^3.0.0"
+    "prettier": "^3.4.0"
   },
   "devDependencies": {
     "@actions/exec": "^1.1.1",
