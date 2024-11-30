@@ -58,6 +58,19 @@ const custom = {
         ignoreEOLComments: true,
       },
     ],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_.*$|^_$|^P$|^flow$|^pipe$',
+        args: 'all',
+        argsIgnorePattern: '^_.*$|^_$|^P$|^flow$|^pipe$',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_.*$|^_$|^P$|^flow$|^pipe$',
+        destructuredArrayIgnorePattern: '^_.*$|^_$|^P$|^flow$|^pipe$',
+        ignoreRestSiblings: true,
+      },
+    ],
   }
 }
 

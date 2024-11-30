@@ -12,7 +12,7 @@ export default [
         semi: false,
         tabWidth: 2,
         arrowParens: "always",
-        jsxSingleQuote: false
+        jsxSingleQuote: false,
       }],
       'arrow-body-style': ['error', 'as-needed'],
       'prefer-arrow-callback': 'error',
