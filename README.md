@@ -1,18 +1,18 @@
 ## Installation
 
 ```bash
-npm install --save-dev @hyeon/eslint-config
+npm install --save-dev @hyeon/linter
 ```
 
 ## Usage
 
 ```js
-import hyeonEslintConfig from '@hyeon/eslint-config'
+import hyeonLinter from '@hyeon/linter'
 
 export default [
-  ...hyeonEslintConfig.recommended,
-  ...hyeonEslintConfig.react,
-  ...hyeonEslintConfig.prettier,
-  ...hyeonEslintConfig.typescript,
+  ...hyeonLinter.recommended,
+  ...hyeonLinter.react,
+  ...hyeonLinter.prettier,
+  ...hyeonLinter.typescript,
 ]
 ```

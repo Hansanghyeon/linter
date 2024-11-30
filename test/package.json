@@ -10,6 +10,7 @@
     "eslint-plugin-prettier": "^5.1.3"
   },
   "devDependencies": {
+    "@hyeon/linter": "^7.0.18",
     "typescript": "^5.4.5"
   }
 }

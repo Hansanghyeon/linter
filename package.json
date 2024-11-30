@@ -1,6 +1,6 @@
 {
-  "name": "@hyeon/eslint-config",
-  "version": "7.0.17",
+  "name": "@hyeon/linter",
+  "version": "7.0.27",
   "description": "Hansanghyun custom eslint settings",
   "main": "./src/index.mjs",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hansanghyeon/eslint-config.git"
+    "url": "git+https://github.com/hansanghyeon/linter.git"
   },
   "keywords": [
     "eslint",
@@ -25,9 +25,9 @@
   "author": "hyeon",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hansanghyeon/eslint-config/issues"
+    "url": "https://github.com/hansanghyeon/linter/issues"
   },
-  "homepage": "https://github.com/hansanghyeon/eslint-config#readme",
+  "homepage": "https://github.com/hansanghyeon/linter#readme",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.16.0",
     "@typescript-eslint/parser": "^8.16.0",
@@ -53,6 +53,7 @@
     "./typescript": "./src/typescript.mjs",
     "./react": "./src/react.mjs",
     "./prettier": "./src/prettier.mjs",
+    "./hansanghyeon": "./src/hansanghyeon.mjs",
     "./package.json": "./package.json"
   },
   "files": [
