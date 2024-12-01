@@ -1,37 +1,22 @@
 import react from 'eslint-plugin-react'
-import reactJsxruntime from 'eslint-plugin-react/configs/jsx-runtime.js'
-import typescriptEslint from '@typescript-eslint/eslint-plugin'
-import typescriptParser from '@typescript-eslint/parser'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
 
-
-export default [
-  {
-    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
-    ...reactJsxruntime,
-    languageOptions: {
-      ...reactJsxruntime.languageOptions,
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      parser: typescriptParser,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-    },
-    plugins: {
-      react,
-      "@typescript-eslint": typescriptEslint,
-    },
-    rules: {
-      'react/jsx-filename-extension': [
-        1,
-        {
-          extensions: ['.jsx', '.tsx'],
-        }
-      ],
-      'react/prop-types': 'off',
-      'react/require-default-props': 'off',
-     },
+export default tseslint.config({
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    react,
+    'react-hooks': reactHooks,
+    'react-refresh': reactRefresh,
   },
-]
+  rules: {
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+    ...reactHooks.configs.recommended.rules,
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+  },
+})

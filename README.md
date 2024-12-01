@@ -16,3 +16,9 @@ export default [
   ...hyeonLinter.typescript,
 ]
 ```
+
+## vite
+
+```bash
+npm uninstall eslint-plugin-react-hooks eslint-plugin-react-refresh typescript-eslin globals
+```
