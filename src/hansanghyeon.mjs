@@ -73,7 +73,8 @@ const custom = {
       },
     ],
     'react/display-name': 'off',
-  }
+  },
+  ignores: [".config/*", "eslint.config.mjs", "eslint.config.js"]
 }
 
 export default [
