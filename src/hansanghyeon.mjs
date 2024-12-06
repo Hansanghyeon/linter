@@ -71,6 +71,7 @@ const custom = {
         ignoreRestSiblings: true,
       },
     ],
+    'react/display-name': 'off',
   }
 }
 
