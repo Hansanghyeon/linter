@@ -1,9 +1,13 @@
+import js from '@eslint/js';
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  js.configs.recommended,
+  tseslint.configs.recommended,
   {
-    extends: tseslint.configs.recommended,
-    files: ['**/*.{ts,tsx}'],
+    ignores: ['node_modules/', 'dist/'],
+    rules: {
+      "react/prop-types": "off",
+    }
   },
 );

@@ -44,13 +44,8 @@ const _import = [
 const custom = {
   rules: {
     'no-empty-pattern': 'off',
-    'lines-around-comment': ['error', { 'beforeBlockComment': true }],
-    camelcase: [
-      'error',
-      {
-        properties: 'never',
-      },
-    ],
+    'lines-around-comment': 'off',
+    camelcase: 'off',
     'class-methods-use-this': 'off',
     'no-multi-spaces': [
       'error',
@@ -58,6 +53,8 @@ const custom = {
         ignoreEOLComments: true,
       },
     ],
+    // 보일러플레이트 코드를 생성할때 {} 를 사용하는 경우가 많아서 off
+    '@typescript-eslint/no-empty-object-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
@@ -73,6 +70,7 @@ const custom = {
       },
     ],
     'react/display-name': 'off',
+    'no-confusing-arrow': 'off'
   },
   ignores: [".config/*", "eslint.config.mjs", "eslint.config.js"]
 }
