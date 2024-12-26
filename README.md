@@ -18,6 +18,8 @@ export default [
 
 ## vite
 
+uninstall
+
 ```bash
-npm uninstall eslint-plugin-react-hooks eslint-plugin-react-refresh typescript-eslin globals
+eslint-plugin-react-hooks eslint-plugin-react-refresh typescript-eslint globals @eslint/js
 ```
