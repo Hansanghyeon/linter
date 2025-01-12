@@ -4,3 +4,5 @@ recommended/
 typescript/
 react/
 prettier/
+
+.justfile*
