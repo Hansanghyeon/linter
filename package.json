@@ -1,12 +1,11 @@
 {
   "name": "@hyeon/linter",
-  "version": "7.0.45",
+  "version": "7.1.0",
   "description": "Hansanghyun custom eslint settings",
   "main": "./src/index.mjs",
   "scripts": {
     "lint": "eslint . --config=eslintrc.json",
-    "test": "npm run lint && tape test/*.js",
-    "postpublish": "make postpublish"
+    "test": "npm run lint && tape test/*.js"
   },
   "repository": {
     "type": "git",
@@ -29,12 +28,12 @@
   },
   "homepage": "https://github.com/hansanghyeon/linter#readme",
   "dependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-refresh": "^0.4.16",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
     "typescript-eslint": "^8.17.0"
   },
   "peerDependencies": {

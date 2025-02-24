@@ -14,6 +14,7 @@ export default [
         printWidth: 120,
         arrowParens: "always",
         jsxSingleQuote: false,
+        "plugins": ["@trivago/prettier-plugin-sort-imports"]
       }],
       'arrow-body-style': ['error', 'as-needed'],
       'prefer-arrow-callback': 'error',
