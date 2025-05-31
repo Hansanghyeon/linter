@@ -14,14 +14,21 @@ export default [
         printWidth: 120,
         arrowParens: "always",
         jsxSingleQuote: false,
+        // NestJS 데코레이터 지원을 위한 설정
+        experimentalDecorators: true,
+        emitDecoratorMetadata: true,
         "plugins": [
           "@trivago/prettier-plugin-sort-imports",
           "prettier-plugin-tailwindcss"
         ],
-        "importOrder": ["^[^.](.*)$", "^[.]{1,2}/.*$"],
-        "importOrderSeparation": false,
+        "importOrder": [
+          "^@nestjs/(.*)$",
+          "^[^.](.*)$", 
+          "^[.]{1,2}/.*$"
+        ],
+        "importOrderSeparation": true,
         "importOrderSortSpecifiers": true,
-        // 데코레이터 지원을 위한 기본 설정
+        // 데코레이터 관련 설정
         "bracketSpacing": true,
         "bracketSameLine": false,
       }],
@@ -39,6 +46,9 @@ export default [
         allowObjectEnd: true,
         allowArrayStart: true,
         allowArrayEnd: true,
+        // 데코레이터 위의 주석 허용
+        allowClassStart: true,
+        allowClassEnd: true,
       }],
       'max-len': 'off',
       'no-confusing-arrow': ['error', {
@@ -50,6 +60,12 @@ export default [
         avoidEscape: true,
         allowTemplateLiterals: false,
       }],
+      // NestJS 데코레이터 관련 규칙 완화
+      '@typescript-eslint/no-unused-vars': ['error', {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      }],
     },
   },
-]
+] 
