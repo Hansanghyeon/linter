@@ -21,9 +21,10 @@ export default [
         "importOrder": ["^[^.](.*)$", "^[.]{1,2}/.*$"],
         "importOrderSeparation": false,
         "importOrderSortSpecifiers": true,
-        // 데코레이터 지원을 위한 기본 설정
-        "bracketSpacing": true,
-        "bracketSameLine": false,
+        /**
+         * @see https://github.com/trivago/prettier-plugin-sort-imports/issues/120
+         */
+        "importOrderParserPlugins": ["typescript", "decorators-legacy", "jsx", "classProperties"],
       }],
       'arrow-body-style': ['error', 'as-needed'],
       'prefer-arrow-callback': 'error',
