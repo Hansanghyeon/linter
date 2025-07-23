@@ -4,8 +4,8 @@
   "description": "Hansanghyun custom eslint settings",
   "main": "./src/index.mjs",
   "scripts": {
-    "lint": "eslint . --config=eslintrc.json",
-    "test": "npm run lint && tape test/*.js"
+    "lint": "eslint src/",
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",

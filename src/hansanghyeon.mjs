@@ -1,13 +1,13 @@
-import importPlugin from 'eslint-plugin-import';
+import importPlugin from 'eslint-plugin-import'
 
 const _import = [
   importPlugin.flatConfigs.recommended,
   {
     rules: {
-      "import/first": "error",
-      "import/newline-after-import": "error",
-      "import/no-duplicates": "error",
-      "import/no-unresolved": "off"
+      'import/first': 'error',
+      'import/newline-after-import': 'error',
+      'import/no-duplicates': 'error',
+      'import/no-unresolved': 'off',
     },
   },
 ]
@@ -24,7 +24,9 @@ const custom = {
         ignoreEOLComments: true,
       },
     ],
+
     // 보일러플레이트 코드를 생성할때 {} 를 사용하는 경우가 많아서 off
+
     '@typescript-eslint/no-empty-object-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': [
@@ -41,12 +43,9 @@ const custom = {
       },
     ],
     'react/display-name': 'off',
-    'no-confusing-arrow': 'off'
+    'no-confusing-arrow': 'off',
   },
-  ignores: [".config/*", "eslint.config.mjs", "eslint.config.js"]
+  ignores: ['.config/*', 'eslint.config.mjs', 'eslint.config.js'],
 }
 
-export default [
-  custom,
-  ..._import,
-];
+export default [custom, ..._import]
