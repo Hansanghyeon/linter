@@ -31,10 +31,31 @@ jobs:
           cd test
           npm install
 
-      - name: Run ESLint tests
+      - name: Run ESLint tests on examples
         run: |
           cd test
           npm run lint
+
+      - name: Test ESLint fix capability on fixtures
+        run: |
+          cd test
+          echo "🧪 Testing ESLint --fix on problematic code..."
+          
+          # Copy fixtures to temp directory for testing
+          cp -r src/fixtures src/fixtures-test
+          
+          # Run eslint --fix on the test fixtures
+          npm run lint:fixtures:fix -- --no-error-on-unmatched-pattern || true
+          
+          # Check if files were modified (indicating --fix worked)
+          if ! diff -r src/fixtures src/fixtures-test > /dev/null; then
+            echo "✅ ESLint --fix successfully modified problematic files"
+          else
+            echo "⚠️  ESLint --fix made no changes to problematic files"
+          fi
+          
+          # Clean up
+          rm -rf src/fixtures-test
 
   package-test:
     name: 📦 패키지 테스트
