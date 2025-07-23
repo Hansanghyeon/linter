@@ -1,0 +1,68 @@
+name: 🧪 테스트
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-test:
+    name: 🔍 ESLint 테스트
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Build linter package
+        run: npm run build || echo "No build script found"
+
+      - name: Install test dependencies
+        run: |
+          cd test
+          npm install
+
+      - name: Run ESLint tests
+        run: |
+          cd test
+          npm run lint
+
+  package-test:
+    name: 📦 패키지 테스트
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run package lint
+        run: npm run lint
+
+      - name: Check package can be imported
+        run: |
+          node -e "
+            try {
+              const config = require('./src/index.mjs');
+              console.log('✅ Package can be imported successfully');
+            } catch (e) {
+              console.error('❌ Package import failed:', e.message);
+              process.exit(1);
+            }
+          "
