@@ -1,30 +1,30 @@
 // React TypeScript test file
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react'
 
 interface Props {
-  title: string;
-  count?: number;
-  onCountChange?: (count: number) => void;
+  title: string
+  count?: number
+  onCountChange?: (count: number) => void
 }
 
 export const Counter: React.FC<Props> = ({ title, count = 0, onCountChange }) => {
-  const [currentCount, setCurrentCount] = useState(count);
+  const [currentCount, setCurrentCount] = useState(count)
 
   useEffect(() => {
-    setCurrentCount(count);
-  }, [count]);
+    setCurrentCount(count)
+  }, [count])
 
   const handleIncrement = () => {
-    const newCount = currentCount + 1;
-    setCurrentCount(newCount);
-    onCountChange?.(newCount);
-  };
+    const newCount = currentCount + 1
+    setCurrentCount(newCount)
+    onCountChange?.(newCount)
+  }
 
   const handleDecrement = () => {
-    const newCount = currentCount - 1;
-    setCurrentCount(newCount);
-    onCountChange?.(newCount);
-  };
+    const newCount = currentCount - 1
+    setCurrentCount(newCount)
+    onCountChange?.(newCount)
+  }
 
   return (
     <div className="counter">
@@ -41,7 +41,7 @@ export const Counter: React.FC<Props> = ({ title, count = 0, onCountChange }) =>
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Counter;
+export default Counter

@@ -6,10 +6,21 @@ export default [
   ...hyeonLinter.typescript,
   ...hyeonLinter.hansanghyeon,
   {
-    ignores: ['node_modules/', 'dist/', '*.config.js'],
+    ignores: ['node_modules/', 'dist/', '*.config.js', 'src/fixtures/**'],
   },
   {
-    files: ['**/*.{js,ts,tsx}'],
+    files: ['**/*.js'],
+    languageOptions: {
+      globals: {
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+      },
+    },
+  },
+  {
+    files: ['**/*.{ts,tsx}'],
     rules: {
       camelcase: 'off',
       'lines-around-comment': 'off',
