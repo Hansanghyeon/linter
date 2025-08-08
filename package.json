@@ -43,11 +43,7 @@
     "eslint": "^9.28.0",
     "prettier": "^3.5.3"
   },
-  "devDependencies": {
-    "@actions/exec": "^1.1.1",
-    "@changesets/cli": "^2.26.2",
-    "semver": "^7.5.4"
-  },
+  "devDependencies": {},
   "exports": {
     ".": {
       "import": "./src/index.mjs",

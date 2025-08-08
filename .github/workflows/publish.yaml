@@ -1,0 +1,93 @@
+name: 📦 NPM 패키지 배포
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'package.json'
+
+jobs:
+  check-version:
+    name: 🔍 버전 변경 확인
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.version.outputs.changed }}
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout current
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 버전 변경 확인
+        id: version
+        run: |
+          # 현재 버전 가져오기
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
+          
+          # 이전 커밋의 버전 가져오기
+          git checkout HEAD~1 2>/dev/null || true
+          if [ -f package.json ]; then
+            PREVIOUS_VERSION=$(node -p "require('./package.json').version" 2>/dev/null || echo "")
+          else
+            PREVIOUS_VERSION=""
+          fi
+          git checkout - 2>/dev/null || true
+          
+          echo "Previous version: $PREVIOUS_VERSION"
+          
+          # 버전 비교
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
+            echo "Version changed from $PREVIOUS_VERSION to $CURRENT_VERSION"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+          else
+            echo "Version not changed"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish:
+    name: 🚀 NPM에 패키지 배포
+    needs: check-version
+    if: needs.check-version.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: 테스트 실행
+        run: npm test
+
+      - name: NPM에 배포
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: GitHub Release 생성
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ needs.check-version.outputs.version }}
+          release_name: v${{ needs.check-version.outputs.version }}
+          body: |
+            ## 📦 Version ${{ needs.check-version.outputs.version }}
+            
+            NPM: https://www.npmjs.com/package/@hyeon/linter/v/${{ needs.check-version.outputs.version }}
+            
+            ### 변경사항
+            package.json의 version이 변경되어 자동으로 배포되었습니다.
+          draft: false
+          prerelease: false
