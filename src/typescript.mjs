@@ -2,7 +2,9 @@ import js from '@eslint/js'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import tseslint from 'typescript-eslint'
 
-export default tseslint.config(
+// tseslint.config()는 이미 flat config 배열을 반환
+
+const config = [
   {
     ignores: ['**/node_modules/**', '**/dist/**', '**/.turbo/**', '**/coverage/**'],
   },
@@ -37,4 +39,6 @@ export default tseslint.config(
       '@typescript-eslint/no-non-null-assertion': 'off',
     },
   },
-)
+]
+
+export default config

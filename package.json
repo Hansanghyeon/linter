@@ -1,6 +1,6 @@
 {
   "name": "@hyeon/linter",
-  "version": "7.3.7",
+  "version": "7.3.8",
   "description": "Hansanghyun custom eslint settings",
   "main": "./src/index.mjs",
   "scripts": {
