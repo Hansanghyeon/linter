@@ -1,6 +1,6 @@
 {
   "name": "@hyeon/linter",
-  "version": "7.3.6",
+  "version": "7.3.7",
   "description": "Hansanghyun custom eslint settings",
   "main": "./src/index.mjs",
   "scripts": {
@@ -49,7 +49,11 @@
     "semver": "^7.5.4"
   },
   "exports": {
-    ".": "./src/index.mjs",
+    ".": {
+      "import": "./src/index.mjs",
+      "require": "./src/index.mjs",
+      "default": "./src/index.mjs"
+    },
     "./recommended": "./src/base.mjs",
     "./typescript": "./src/typescript.mjs",
     "./react": "./src/react.mjs",
